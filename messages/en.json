@@ -1,0 +1,38 @@
+{
+  "site": {
+    "name": "Sitges Directory",
+    "tagline": "The professional business directory of Sitges"
+  },
+  "nav": {
+    "home": "Home",
+    "categories": "Categories",
+    "map": "Map",
+    "blog": "Blog",
+    "login": "Sign in",
+    "register": "List your business"
+  },
+  "home": {
+    "heroTitle": "Discover the best of Sitges",
+    "heroSubtitle": "Restaurants, hotels, nightlife, beaches and more. All in one place.",
+    "ctaExplore": "Explore categories",
+    "ctaRegister": "List your business",
+    "verticalsTitle": "Explore by category"
+  },
+  "verticals": {
+    "restaurants": "Restaurants",
+    "hotels": "Hotels & lodging",
+    "nightlife": "Nightlife",
+    "beaches": "Beaches & coves",
+    "nature": "Leisure & nature",
+    "services": "Services"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies"
+  },
+  "locale": {
+    "switch": "Language"
+  }
+}

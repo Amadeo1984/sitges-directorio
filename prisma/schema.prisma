@@ -1,0 +1,61 @@
+// Schema mínimo del sprint 0 — Category + Business básico.
+// El modelo completo (translations, hours, media, reviews, redirects, etc.)
+// se añade en el sprint 1 según docs/03-data-model.md.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Locale {
+  es
+  ca
+  en
+  fr
+}
+
+enum BusinessStatus {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+  REJECTED
+  ARCHIVED
+}
+
+model Category {
+  id         String   @id @default(cuid())
+  key        String   @unique           // "restaurants", "hotels", ...
+  parentId   String?
+  parent     Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children   Category[] @relation("CategoryTree")
+  schemaType String                     // "Restaurant", "LodgingBusiness", ...
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  businesses Business[]
+
+  @@index([parentId, order])
+}
+
+model Business {
+  id          String         @id @default(cuid())
+  categoryId  String
+  category    Category       @relation(fields: [categoryId], references: [id])
+  status      BusinessStatus @default(DRAFT)
+  name        String
+  phone       String?
+  website     String?
+  address     String?
+  lat         Decimal?       @db.Decimal(9, 6)
+  lng         Decimal?       @db.Decimal(9, 6)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  publishedAt DateTime?
+
+  @@index([categoryId, status, publishedAt(sort: Desc)])
+}

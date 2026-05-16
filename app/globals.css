@@ -1,0 +1,36 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand-50: #f0fbf4;
+  --color-brand-100: #dcf7e3;
+  --color-brand-200: #bcedca;
+  --color-brand-300: #8bdda4;
+  --color-brand-400: #54c477;
+  --color-brand-500: #2fa856;
+  --color-brand-600: #21873f;  /* tono del logo actual */
+  --color-brand-700: #1c6c34;
+  --color-brand-800: #19562c;
+  --color-brand-900: #154726;
+
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Montserrat', var(--font-sans);
+
+  --radius-card: 0.75rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    color: #111827;
+    background: #fafafa;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+}

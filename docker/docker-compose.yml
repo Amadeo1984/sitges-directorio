@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: sitges-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sitges
+      POSTGRES_PASSWORD: sitges
+      POSTGRES_DB: sitges
+    ports:
+      - "5432:5432"
+    volumes:
+      - sitges_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sitges -d sitges"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  sitges_pg_data:
