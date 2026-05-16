@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { LocaleSwitcher } from './locale-switcher';
+import { Logo } from './logo';
 
 export async function SiteHeader() {
   const t = await getTranslations('nav');
@@ -9,9 +10,9 @@ export async function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-gray-200 bg-white/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link href="/" className="flex items-center gap-2 font-semibold text-brand-700">
-          <span className="text-xl">🌴</span>
-          <span className="font-display text-lg">{tSite('name')}</span>
+        <Link href="/" className="flex items-center gap-2.5 font-semibold text-brand-700">
+          <Logo size={32} />
+          <span className="font-display text-lg leading-none">{tSite('name')}</span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-gray-700 md:flex">
           <Link href="/" className="hover:text-brand-700">{t('categories')}</Link>

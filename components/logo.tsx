@@ -1,0 +1,34 @@
+interface LogoProps {
+  size?: number;
+  className?: string;
+}
+
+export function Logo({ size = 32, className }: LogoProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="logoPin" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#2fa856" />
+          <stop offset="100%" stopColor="#19562c" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M32 4 C18.7 4 8 14.4 8 27.2 c0 14.5 16.5 28.6 22.4 33.1 a2.6 2.6 0 0 0 3.2 0 C39.5 55.8 56 41.7 56 27.2 C56 14.4 45.3 4 32 4 Z"
+        fill="url(#logoPin)"
+      />
+      <circle cx="32" cy="26.5" r="13.5" fill="#fafafa" />
+      <path d="M20.5 21 L31 18.5 L25.5 27.5 Z" fill="#21873f" />
+      <path d="M33 22.5 L43.5 23.8 L36 32.3 Z" fill="#54c477" />
+      <path d="M22.5 30.5 L33 31.5 L27.5 35.5 Z" fill="#19562c" />
+      <circle cx="48" cy="14" r="3.2" fill="#f5b342" />
+    </svg>
+  );
+}
