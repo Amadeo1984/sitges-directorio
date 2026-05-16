@@ -17,5 +17,37 @@ services:
       timeout: 5s
       retries: 10
 
+  minio:
+    image: minio/minio:latest
+    container_name: sitges-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: sitges
+      MINIO_ROOT_PASSWORD: sitges-dev-secret
+    ports:
+      - "9100:9000"
+      - "9101:9001"
+    volumes:
+      - sitges_minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 3;
+      /usr/bin/mc alias set local http://minio:9000 sitges sitges-dev-secret;
+      /usr/bin/mc mb -p local/sitges-media || true;
+      /usr/bin/mc anonymous set download local/sitges-media || true;
+      "
+
 volumes:
   sitges_pg_data:
+  sitges_minio_data:

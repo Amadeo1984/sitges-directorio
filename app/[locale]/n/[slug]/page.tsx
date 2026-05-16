@@ -9,6 +9,8 @@ import {
 import { JsonLd } from '@/components/seo/json-ld';
 import { Breadcrumbs } from '@/components/seo/breadcrumbs';
 import { BusinessHours } from '@/components/business/business-hours';
+import { ClaimButton } from '@/components/business/claim-button';
+import { getServerSession } from '@/lib/session';
 import { type Locale } from '@/i18n/config';
 import type { Metadata } from 'next';
 import { db } from '@/lib/db';
@@ -64,6 +66,7 @@ export default async function BusinessPage({ params }: { params: Promise<Params>
 
   const tBiz = await getTranslations('business');
   const tCrumb = await getTranslations('breadcrumbs');
+  const session = await getServerSession();
 
   const biz = tr.business;
   const category = biz.category;
@@ -240,6 +243,14 @@ export default async function BusinessPage({ params }: { params: Promise<Params>
                 </a>
               )}
             </dl>
+            <div className="mt-6 border-t border-gray-200 pt-4">
+              <ClaimButton
+                businessId={biz.id}
+                isOwned={!!biz.ownerId}
+                isLoggedIn={!!session?.user}
+                loginUrl={`/${locale}/login?next=/${locale}/n/${tr.slug}`}
+              />
+            </div>
           </aside>
         </div>
       </section>
