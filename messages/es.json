@@ -34,5 +34,54 @@
   },
   "locale": {
     "switch": "Idioma"
+  },
+  "breadcrumbs": {
+    "home": "Inicio"
+  },
+  "category": {
+    "subcategoriesTitle": "Subcategorías",
+    "businessesTitle": "Negocios destacados",
+    "businessCount": "{count, plural, =0 {Sin negocios} one {1 negocio} other {# negocios}}",
+    "viewAll": "Ver todos",
+    "noResults": "No hay negocios todavía en esta categoría.",
+    "guideTitle": "Guía"
+  },
+  "business": {
+    "contact": "Contacto",
+    "phone": "Teléfono",
+    "website": "Web",
+    "address": "Dirección",
+    "hours": "Horarios",
+    "gallery": "Galería",
+    "location": "Ubicación",
+    "openInMaps": "Abrir en Google Maps",
+    "tags": "Etiquetas",
+    "related": "También te puede interesar"
+  },
+  "businessHours": {
+    "sun": "Domingo",
+    "mon": "Lunes",
+    "tue": "Martes",
+    "wed": "Miércoles",
+    "thu": "Jueves",
+    "fri": "Viernes",
+    "sat": "Sábado",
+    "closed": "Cerrado"
+  },
+  "search": {
+    "placeholder": "Buscar negocios, categorías…",
+    "submit": "Buscar",
+    "resultsTitle": "Resultados para “{q}”",
+    "noResults": "No hay resultados para tu búsqueda.",
+    "tryAgain": "Prueba otros términos o explora las categorías."
+  },
+  "map": {
+    "title": "Mapa de Sitges",
+    "subtitle": "Todos los negocios publicados sobre el plano."
+  },
+  "pagination": {
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "page": "Página {page} de {total}"
   }
 }

@@ -32,7 +32,52 @@
     "terms": "Termes",
     "cookies": "Galetes"
   },
-  "locale": {
-    "switch": "Idioma"
+  "locale": { "switch": "Idioma" },
+  "breadcrumbs": { "home": "Inici" },
+  "category": {
+    "subcategoriesTitle": "Subcategories",
+    "businessesTitle": "Negocis destacats",
+    "businessCount": "{count, plural, =0 {Sense negocis} one {1 negoci} other {# negocis}}",
+    "viewAll": "Veure'n tots",
+    "noResults": "Encara no hi ha negocis en aquesta categoria.",
+    "guideTitle": "Guia"
+  },
+  "business": {
+    "contact": "Contacte",
+    "phone": "Telèfon",
+    "website": "Web",
+    "address": "Adreça",
+    "hours": "Horaris",
+    "gallery": "Galeria",
+    "location": "Ubicació",
+    "openInMaps": "Obrir a Google Maps",
+    "tags": "Etiquetes",
+    "related": "També et pot interessar"
+  },
+  "businessHours": {
+    "sun": "Diumenge",
+    "mon": "Dilluns",
+    "tue": "Dimarts",
+    "wed": "Dimecres",
+    "thu": "Dijous",
+    "fri": "Divendres",
+    "sat": "Dissabte",
+    "closed": "Tancat"
+  },
+  "search": {
+    "placeholder": "Cerca negocis, categories…",
+    "submit": "Cerca",
+    "resultsTitle": "Resultats per a «{q}»",
+    "noResults": "No hi ha resultats per a la teva cerca.",
+    "tryAgain": "Prova altres termes o explora les categories."
+  },
+  "map": {
+    "title": "Mapa de Sitges",
+    "subtitle": "Tots els negocis publicats sobre el pla."
+  },
+  "pagination": {
+    "prev": "Anterior",
+    "next": "Següent",
+    "page": "Pàgina {page} de {total}"
   }
 }

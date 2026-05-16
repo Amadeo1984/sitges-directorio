@@ -32,7 +32,52 @@
     "terms": "Conditions",
     "cookies": "Cookies"
   },
-  "locale": {
-    "switch": "Langue"
+  "locale": { "switch": "Langue" },
+  "breadcrumbs": { "home": "Accueil" },
+  "category": {
+    "subcategoriesTitle": "Sous-catégories",
+    "businessesTitle": "Entreprises en vedette",
+    "businessCount": "{count, plural, =0 {Aucune fiche} one {1 fiche} other {# fiches}}",
+    "viewAll": "Voir tout",
+    "noResults": "Pas encore d'entreprises dans cette catégorie.",
+    "guideTitle": "Guide"
+  },
+  "business": {
+    "contact": "Contact",
+    "phone": "Téléphone",
+    "website": "Site web",
+    "address": "Adresse",
+    "hours": "Horaires",
+    "gallery": "Galerie",
+    "location": "Localisation",
+    "openInMaps": "Ouvrir dans Google Maps",
+    "tags": "Tags",
+    "related": "Vous aimerez aussi"
+  },
+  "businessHours": {
+    "sun": "Dimanche",
+    "mon": "Lundi",
+    "tue": "Mardi",
+    "wed": "Mercredi",
+    "thu": "Jeudi",
+    "fri": "Vendredi",
+    "sat": "Samedi",
+    "closed": "Fermé"
+  },
+  "search": {
+    "placeholder": "Rechercher entreprises, catégories…",
+    "submit": "Rechercher",
+    "resultsTitle": "Résultats pour « {q} »",
+    "noResults": "Aucun résultat pour votre recherche.",
+    "tryAgain": "Essayez d'autres termes ou parcourez les catégories."
+  },
+  "map": {
+    "title": "Carte de Sitges",
+    "subtitle": "Toutes les entreprises publiées sur la carte."
+  },
+  "pagination": {
+    "prev": "Précédent",
+    "next": "Suivant",
+    "page": "Page {page} sur {total}"
   }
 }

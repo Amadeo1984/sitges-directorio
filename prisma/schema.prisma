@@ -1,6 +1,6 @@
-// Schema mínimo del sprint 0 — Category + Business básico.
-// El modelo completo (translations, hours, media, reviews, redirects, etc.)
-// se añade en el sprint 1 según docs/03-data-model.md.
+// Modelo completo del sprint 1.
+// User/Session/Account vendrán en sprint 2 (Better Auth los gestiona).
+// Aquí solo declaramos User mínimo como placeholder para ownerId.
 
 generator client {
   provider = "prisma-client-js"
@@ -18,6 +18,12 @@ enum Locale {
   fr
 }
 
+enum UserRole {
+  OWNER
+  ADMIN
+  EDITOR
+}
+
 enum BusinessStatus {
   DRAFT
   PENDING_REVIEW
@@ -26,36 +32,277 @@ enum BusinessStatus {
   ARCHIVED
 }
 
+enum Plan {
+  FREE
+  FEATURED
+  PREMIUM
+}
+
+enum PriceRange {
+  CHEAP
+  MID
+  HIGH
+  LUXURY
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  FLAGGED
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  role          UserRole  @default(OWNER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  businesses Business[] @relation("BusinessOwner")
+  reviews    Review[]
+  posts      Post[]
+}
+
 model Category {
-  id         String   @id @default(cuid())
-  key        String   @unique           // "restaurants", "hotels", ...
+  id         String     @id @default(cuid())
+  key        String     @unique
   parentId   String?
   parent     Category?  @relation("CategoryTree", fields: [parentId], references: [id])
   children   Category[] @relation("CategoryTree")
-  schemaType String                     // "Restaurant", "LodgingBusiness", ...
-  order      Int      @default(0)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  icon       String?
+  order      Int        @default(0)
+  schemaType String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 
-  businesses Business[]
+  translations CategoryTranslation[]
+  businesses   Business[]
 
   @@index([parentId, order])
 }
 
+model CategoryTranslation {
+  id             String   @id @default(cuid())
+  categoryId     String
+  category       Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  locale         Locale
+  name           String
+  slug           String
+  description    String?  @db.Text
+  seoTitle       String?
+  seoDescription String?
+
+  @@unique([categoryId, locale])
+  // Slug no es único globalmente: se resuelve por jerarquía (padre + slug),
+  // así "familiares" puede existir en hoteles y restaurantes.
+  @@index([locale, slug])
+}
+
 model Business {
-  id          String         @id @default(cuid())
-  categoryId  String
-  category    Category       @relation(fields: [categoryId], references: [id])
-  status      BusinessStatus @default(DRAFT)
-  name        String
-  phone       String?
-  website     String?
-  address     String?
-  lat         Decimal?       @db.Decimal(9, 6)
-  lng         Decimal?       @db.Decimal(9, 6)
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
+  id         String         @id @default(cuid())
+  ownerId    String?
+  owner      User?          @relation("BusinessOwner", fields: [ownerId], references: [id])
+  categoryId String
+  category   Category       @relation(fields: [categoryId], references: [id])
+  status     BusinessStatus @default(DRAFT)
+  plan       Plan           @default(FREE)
+  featured   Boolean        @default(false)
+  verified   Boolean        @default(false)
+
+  phone     String?
+  email     String?
+  website   String?
+  whatsapp  String?
+  instagram String?
+  facebook  String?
+  tiktok    String?
+
+  address    String?
+  postalCode String?
+  district   String?
+  lat        Decimal? @db.Decimal(9, 6)
+  lng        Decimal? @db.Decimal(9, 6)
+
+  priceRange     PriceRange?
+  capacity       Int?
+  amenities      String[]
+  paymentMethods String[]
+
+  ratingAvg   Float?
+  ratingCount Int    @default(0)
+  viewCount   Int    @default(0)
+
   publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  translations BusinessTranslation[]
+  hours        OpeningHours[]
+  media        Media[]
+  reviews      Review[]
+  tags         TagOnBusiness[]
+  slugHistory  BusinessSlugHistory[]
 
   @@index([categoryId, status, publishedAt(sort: Desc)])
+  @@index([status, featured, publishedAt(sort: Desc)])
+  @@index([lat, lng])
+}
+
+model BusinessTranslation {
+  id               String   @id @default(cuid())
+  businessId       String
+  business         Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  locale           Locale
+  slug             String
+  name             String
+  shortDescription String?
+  description      String?  @db.Text
+  seoTitle         String?
+  seoDescription   String?
+
+  @@unique([businessId, locale])
+  @@unique([locale, slug])
+}
+
+model BusinessSlugHistory {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  locale     Locale
+  oldSlug    String
+  changedAt  DateTime @default(now())
+
+  @@unique([locale, oldSlug])
+}
+
+model OpeningHours {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  dayOfWeek  Int
+  openTime   String
+  closeTime  String
+  note       String?
+
+  @@index([businessId, dayOfWeek])
+}
+
+model Media {
+  id         String    @id @default(cuid())
+  businessId String
+  business   Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  type       MediaType @default(IMAGE)
+  key        String
+  url        String
+  alt        String?
+  width      Int?
+  height     Int?
+  position   Int       @default(0)
+  isPrimary  Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+
+  @@index([businessId, position])
+}
+
+model Tag {
+  id           String           @id @default(cuid())
+  key          String           @unique
+  translations TagTranslation[]
+  businesses   TagOnBusiness[]
+}
+
+model TagTranslation {
+  id     String @id @default(cuid())
+  tagId  String
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  locale Locale
+  name   String
+  slug   String
+
+  @@unique([tagId, locale])
+  @@unique([locale, slug])
+}
+
+model TagOnBusiness {
+  businessId String
+  tagId      String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  tag        Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([businessId, tagId])
+  @@index([tagId, businessId])
+}
+
+model Review {
+  id         String       @id @default(cuid())
+  businessId String
+  business   Business     @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User         @relation(fields: [userId], references: [id])
+  rating     Int
+  title      String?
+  body       String       @db.Text
+  locale     Locale
+  status     ReviewStatus @default(PENDING)
+  createdAt  DateTime     @default(now())
+  reply      String?      @db.Text
+  replyAt    DateTime?
+
+  @@unique([businessId, userId])
+  @@index([businessId, status, createdAt(sort: Desc)])
+}
+
+model Post {
+  id           String            @id @default(cuid())
+  status       PostStatus        @default(DRAFT)
+  authorId     String
+  author       User              @relation(fields: [authorId], references: [id])
+  publishedAt  DateTime?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  translations PostTranslation[]
+
+  @@index([status, publishedAt(sort: Desc)])
+}
+
+model PostTranslation {
+  id             String  @id @default(cuid())
+  postId         String
+  post           Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  locale         Locale
+  slug           String
+  title          String
+  excerpt        String?
+  content        String  @db.Text
+  cover          String?
+  seoTitle       String?
+  seoDescription String?
+
+  @@unique([postId, locale])
+  @@unique([locale, slug])
+}
+
+model Redirect {
+  id        String    @id @default(cuid())
+  fromPath  String    @unique
+  toPath    String
+  code      Int       @default(301)
+  hits      Int       @default(0)
+  lastHitAt DateTime?
+  createdAt DateTime  @default(now())
 }
