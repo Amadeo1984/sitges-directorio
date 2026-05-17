@@ -595,13 +595,231 @@ export const CATEGORIES: CategorySeed[] = [
           fr: { name: 'Sports nautiques', slug: 'sports-nautiques' },
         },
       },
+      {
+        key: 'nature-golf',
+        order: 6,
+        t: {
+          es: { name: 'Golf', slug: 'golf' },
+          ca: { name: 'Golf', slug: 'golf' },
+          en: { name: 'Golf', slug: 'golf' },
+          fr: { name: 'Golf', slug: 'golf' },
+        },
+      },
+      {
+        key: 'nature-climbing',
+        order: 7,
+        t: {
+          es: { name: 'Escalada', slug: 'escalada' },
+          ca: { name: 'Escalada', slug: 'escalada' },
+          en: { name: 'Climbing', slug: 'climbing' },
+          fr: { name: 'Escalade', slug: 'escalade' },
+        },
+      },
+      {
+        key: 'nature-paragliding',
+        order: 8,
+        t: {
+          es: { name: 'Parapente', slug: 'parapente' },
+          ca: { name: 'Parapent', slug: 'parapent' },
+          en: { name: 'Paragliding', slug: 'paragliding' },
+          fr: { name: 'Parapente', slug: 'parapente' },
+        },
+      },
+      {
+        key: 'nature-horse',
+        order: 9,
+        t: {
+          es: { name: 'Paseos a caballo', slug: 'paseos-caballo' },
+          ca: { name: 'Passeigs a cavall', slug: 'passeigs-cavall' },
+          en: { name: 'Horse riding', slug: 'horse-riding' },
+          fr: { name: 'Équitation', slug: 'equitation' },
+        },
+      },
+      {
+        key: 'nature-markets',
+        order: 10,
+        t: {
+          es: { name: 'Mercados locales', slug: 'mercados-locales' },
+          ca: { name: 'Mercats locals', slug: 'mercats-locals' },
+          en: { name: 'Local markets', slug: 'local-markets' },
+          fr: { name: 'Marchés locaux', slug: 'marches-locaux' },
+        },
+      },
+    ],
+  },
+  {
+    key: 'shops',
+    schemaType: 'Store',
+    icon: 'shopping-bag',
+    order: 7,
+    t: {
+      es: {
+        name: 'Tiendas',
+        slug: 'tiendas',
+        description: 'Tiendas locales de Sitges: arte, ropa, decoración, deportes, electrónica, regalos.',
+        seoTitle: 'Tiendas en Sitges — Comercio local',
+      },
+      ca: {
+        name: 'Botigues',
+        slug: 'botigues',
+        description: 'Botigues locals de Sitges: art, roba, decoració, esports, electrònica, regals.',
+        seoTitle: 'Botigues a Sitges — Comerç local',
+      },
+      en: {
+        name: 'Shops',
+        slug: 'shops',
+        description: 'Local shops in Sitges: art, clothing, decor, sports, electronics, gifts.',
+        seoTitle: 'Shops in Sitges — Local commerce',
+      },
+      fr: {
+        name: 'Boutiques',
+        slug: 'boutiques',
+        description: 'Boutiques locales à Sitges : art, vêtements, déco, sport, électronique, cadeaux.',
+        seoTitle: 'Boutiques à Sitges — Commerce local',
+      },
+    },
+    children: [
+      {
+        key: 'shops-art',
+        order: 1,
+        t: {
+          es: { name: 'Arte', slug: 'arte' },
+          ca: { name: 'Art', slug: 'art' },
+          en: { name: 'Art', slug: 'art' },
+          fr: { name: 'Art', slug: 'art' },
+        },
+      },
+      {
+        key: 'shops-decor',
+        order: 2,
+        t: {
+          es: { name: 'Decoración', slug: 'decoracion' },
+          ca: { name: 'Decoració', slug: 'decoracio' },
+          en: { name: 'Decor', slug: 'decor' },
+          fr: { name: 'Décoration', slug: 'decoration' },
+        },
+      },
+      {
+        key: 'shops-sports',
+        order: 3,
+        t: {
+          es: { name: 'Deportes', slug: 'deportes' },
+          ca: { name: 'Esports', slug: 'esports' },
+          en: { name: 'Sports', slug: 'sports' },
+          fr: { name: 'Sports', slug: 'sports' },
+        },
+      },
+      {
+        key: 'shops-electronics',
+        order: 4,
+        t: {
+          es: { name: 'Electrónica', slug: 'electronica' },
+          ca: { name: 'Electrònica', slug: 'electronica' },
+          en: { name: 'Electronics', slug: 'electronics' },
+          fr: { name: 'Électronique', slug: 'electronique' },
+        },
+      },
+      {
+        key: 'shops-bookstores',
+        order: 5,
+        t: {
+          es: { name: 'Librerías', slug: 'librerias' },
+          ca: { name: 'Llibreries', slug: 'llibreries' },
+          en: { name: 'Bookstores', slug: 'bookstores' },
+          fr: { name: 'Librairies', slug: 'librairies' },
+        },
+      },
+      {
+        key: 'shops-clothing',
+        order: 6,
+        t: {
+          es: { name: 'Ropa', slug: 'ropa' },
+          ca: { name: 'Roba', slug: 'roba' },
+          en: { name: 'Clothing', slug: 'clothing' },
+          fr: { name: 'Vêtements', slug: 'vetements' },
+        },
+      },
+      {
+        key: 'shops-gourmet-food',
+        order: 7,
+        t: {
+          es: { name: 'Alimentación gourmet', slug: 'alimentacion-gourmet' },
+          ca: { name: 'Alimentació gourmet', slug: 'alimentacio-gourmet' },
+          en: { name: 'Gourmet food', slug: 'gourmet-food' },
+          fr: { name: 'Épicerie fine', slug: 'epicerie-fine' },
+        },
+      },
+      {
+        key: 'shops-gifts',
+        order: 8,
+        t: {
+          es: { name: 'Regalos y souvenirs', slug: 'regalos-souvenirs' },
+          ca: { name: 'Regals i souvenirs', slug: 'regals-souvenirs' },
+          en: { name: 'Gifts & souvenirs', slug: 'gifts-souvenirs' },
+          fr: { name: 'Cadeaux et souvenirs', slug: 'cadeaux-souvenirs' },
+        },
+      },
+    ],
+  },
+  {
+    key: 'real-estate',
+    schemaType: 'RealEstateAgent',
+    icon: 'home',
+    order: 8,
+    t: {
+      es: {
+        name: 'Inmobiliaria',
+        slug: 'inmobiliaria',
+        description: 'Compra y alquiler de viviendas en Sitges.',
+        seoTitle: 'Inmobiliaria en Sitges',
+      },
+      ca: {
+        name: 'Immobiliària',
+        slug: 'immobiliaria',
+        description: 'Compra i lloguer d\'habitatges a Sitges.',
+        seoTitle: 'Immobiliària a Sitges',
+      },
+      en: {
+        name: 'Real estate',
+        slug: 'real-estate',
+        description: 'Buying and renting properties in Sitges.',
+        seoTitle: 'Real estate in Sitges',
+      },
+      fr: {
+        name: 'Immobilier',
+        slug: 'immobilier',
+        description: 'Achat et location de logements à Sitges.',
+        seoTitle: 'Immobilier à Sitges',
+      },
+    },
+    children: [
+      {
+        key: 'real-estate-buy',
+        order: 1,
+        t: {
+          es: { name: 'Compra de vivienda', slug: 'compra' },
+          ca: { name: 'Compra d\'habitatge', slug: 'compra' },
+          en: { name: 'Buy', slug: 'buy' },
+          fr: { name: 'Achat', slug: 'achat' },
+        },
+      },
+      {
+        key: 'real-estate-rent',
+        order: 2,
+        t: {
+          es: { name: 'Alquiler', slug: 'alquiler' },
+          ca: { name: 'Lloguer', slug: 'lloguer' },
+          en: { name: 'Rent', slug: 'rent' },
+          fr: { name: 'Location', slug: 'location' },
+        },
+      },
     ],
   },
   {
     key: 'services',
     schemaType: 'LocalBusiness',
     icon: 'briefcase',
-    order: 6,
+    order: 9,
     t: {
       es: {
         name: 'Servicios',

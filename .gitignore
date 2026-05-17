@@ -36,3 +36,6 @@ prisma/migrations/dev/
 
 # scrape raw HTML (pesado, regenerable; conservamos solo data/)
 scrape/raw/
+
+# WP export del cliente (privado, no commitear)
+data/wp-import/

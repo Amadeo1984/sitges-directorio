@@ -1,6 +1,6 @@
-// Mapeo de las 40 URLs antiguas del WordPress sitges.pro a las nuevas categorías/subcategorías.
-// Todas redirigen al locale 'es' (default) — el visitante de otra lengua llega ahí
-// y el middleware/HTML hreflang le permite cambiar.
+// Mapeo de las URLs antiguas del WordPress sitges.pro a las nuevas categorías/subcategorías.
+// Todas redirigen al locale 'es' (default); el visitante de otra lengua llega ahí
+// y el HTML hreflang le permite cambiar.
 
 interface RedirectSeed {
   from: string;
@@ -15,6 +15,7 @@ export const REDIRECTS: RedirectSeed[] = [
   { from: '/mejores-restaurantes-italianos-en-sitges/', to: '/es/restaurantes/italianos' },
   { from: '/mejores-restaurantes-asiaticos-en-sitges/', to: '/es/restaurantes/asiaticos' },
   { from: '/mejores-restaurantes-de-mariscos-en-sitges/', to: '/es/restaurantes/mariscos' },
+  { from: '/mejores-restaurantes-vegetarianos-veganos-en-sitges/', to: '/es/restaurantes/vegetarianos-veganos' },
   { from: '/mejores-restaurantes-vegetarianos-veganos/', to: '/es/restaurantes/vegetarianos-veganos' },
   { from: '/mejores-restaurantes-para-familias-en-sitges/', to: '/es/restaurantes/familiares' },
   { from: '/mejores-restaurantes-economicos-en-sitges/', to: '/es/restaurantes/economicos' },
@@ -58,4 +59,23 @@ export const REDIRECTS: RedirectSeed[] = [
   { from: '/mejores-rutas-de-ciclismo-en-sitges/', to: '/es/naturaleza/ciclismo' },
   { from: '/mejores-parques-y-jardines-en-sitges/', to: '/es/naturaleza/parques-jardines' },
   { from: '/mejores-sitios-para-deportes-acuaticos-en-sitges/', to: '/es/naturaleza/deportes-acuaticos' },
+  { from: '/mejores-campos-de-golf-en-sitges/', to: '/es/naturaleza/golf' },
+  { from: '/escalada-en-sitges/', to: '/es/naturaleza/escalada' },
+  { from: '/parapente-en-sitges/', to: '/es/naturaleza/parapente' },
+  { from: '/paseos-a-caballo-en-sitges/', to: '/es/naturaleza/paseos-caballo' },
+  { from: '/mejores-mercados-locales-en-sitges/', to: '/es/naturaleza/mercados-locales' },
+
+  // Tiendas
+  { from: '/mejores-tiendas-de-arte-en-sitges/', to: '/es/tiendas/arte' },
+  { from: '/mejores-tiendas-de-decoracion-en-sitges/', to: '/es/tiendas/decoracion' },
+  { from: '/mejores-tiendas-de-deportes-en-sitges/', to: '/es/tiendas/deportes' },
+  { from: '/mejores-tiendas-de-electronica-en-sitges/', to: '/es/tiendas/electronica' },
+  { from: '/mejores-librerias-en-sitges/', to: '/es/tiendas/librerias' },
+  { from: '/tiendas-de-ropa-en-sitges/', to: '/es/tiendas/ropa' },
+  { from: '/tiendas-de-alimentacion-gourmet-en-sitges/', to: '/es/tiendas/alimentacion-gourmet' },
+  { from: '/tiendas-de-regalos-y-souvenirs-en-sitges/', to: '/es/tiendas/regalos-souvenirs' },
+
+  // Inmobiliaria
+  { from: '/compra-de-viviendas-en-sitges/', to: '/es/inmobiliaria/compra' },
+  { from: '/pisos-de-alquiler-en-sitges/', to: '/es/inmobiliaria/alquiler' },
 ];

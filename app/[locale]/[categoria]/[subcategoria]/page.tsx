@@ -107,13 +107,27 @@ export default async function SubcategoryPage({ params }: { params: Promise<Para
         <h1 className="text-4xl font-semibold tracking-tight text-gray-900">
           {sub.name} <span className="text-gray-400">— {parentT.name}</span>
         </h1>
-        {sub.description && (
-          <p className="mt-3 max-w-3xl text-lg text-gray-600">{sub.description}</p>
-        )}
         <p className="mt-2 text-sm text-gray-500">{t('businessCount', { count: items.length })}</p>
       </section>
 
+      {sub.description && (
+        <section className="mx-auto max-w-6xl px-6 pb-10">
+          {sub.description.trimStart().startsWith('<') ? (
+            <div
+              className="prose prose-sm sm:prose max-w-3xl text-gray-700 [&_h3]:mt-6 [&_h3]:text-base [&_h3]:font-semibold [&_h3]:text-gray-900 [&_p]:mt-2"
+              // Contenido controlado, generado server-side por scripts/migrate-wp.ts (escape HTML aplicado)
+              dangerouslySetInnerHTML={{ __html: sub.description }}
+            />
+          ) : (
+            <p className="max-w-3xl text-lg text-gray-600">{sub.description}</p>
+          )}
+        </section>
+      )}
+
       <section className="mx-auto max-w-6xl px-6 pb-16">
+        <h2 className="mb-4 text-xl font-semibold text-gray-900">
+          {t('businessesTitle')}
+        </h2>
         {items.length === 0 ? (
           <p className="text-gray-600">{t('noResults')}</p>
         ) : (

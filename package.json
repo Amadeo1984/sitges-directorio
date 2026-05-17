@@ -13,7 +13,8 @@
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma migrate reset --force"
+    "db:reset": "prisma migrate reset --force",
+    "migrate:wp": "tsx scripts/migrate-wp.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1048.0",
@@ -21,6 +22,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@prisma/client": "^5.22.0",
     "better-auth": "^1.6.11",
+    "fast-xml-parser": "^5.8.0",
     "maplibre-gl": "^5.24.0",
     "next": "^15.1.0",
     "next-intl": "^3.26.0",
