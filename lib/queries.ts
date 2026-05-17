@@ -105,12 +105,26 @@ export async function getBusinessBySlug(locale: Locale, slug: string) {
           hours: { orderBy: { dayOfWeek: 'asc' } },
           media: { orderBy: { position: 'asc' } },
           tags: { include: { tag: { include: { translations: true } } } },
+          reviews: {
+            where: { status: 'APPROVED' },
+            orderBy: { createdAt: 'desc' },
+            include: { user: { select: { name: true } } },
+          },
         },
       },
     },
   });
   if (!tr || tr.business.status !== BusinessStatus.PUBLISHED) return null;
   return tr;
+}
+
+/** Comprueba si un usuario ya tiene review en un negocio. */
+export async function userHasReviewFor(userId: string, businessId: string) {
+  const r = await db.review.findUnique({
+    where: { businessId_userId: { businessId, userId } },
+    select: { id: true },
+  });
+  return !!r;
 }
 
 /** Comprueba si un slug histórico debe redirigir. */

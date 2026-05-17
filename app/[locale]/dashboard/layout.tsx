@@ -52,7 +52,13 @@ export default async function DashboardLayout({
                     href={`/${locale}/dashboard/admin/moderacion`}
                     className="rounded-md px-3 py-2 text-gray-700 hover:bg-gray-100 block"
                   >
-                    Moderación
+                    Moderación negocios
+                  </Link>
+                  <Link
+                    href={`/${locale}/dashboard/admin/reviews`}
+                    className="rounded-md px-3 py-2 text-gray-700 hover:bg-gray-100 block"
+                  >
+                    Reseñas pendientes
                   </Link>
                   <Link
                     href={`/${locale}/dashboard/admin/usuarios`}

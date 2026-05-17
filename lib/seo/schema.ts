@@ -36,6 +36,13 @@ interface BusinessForSchema {
   ratingCount?: number;
   images?: string[];
   openingHours?: { dayOfWeek: number; openTime: string; closeTime: string }[];
+  reviews?: {
+    rating: number;
+    title?: string | null;
+    body: string;
+    authorName: string | null;
+    createdAt: Date;
+  }[];
 }
 
 const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -87,6 +94,22 @@ export function localBusinessSchema(b: BusinessForSchema) {
       bestRating: 5,
       worstRating: 1,
     };
+  }
+
+  if (b.reviews && b.reviews.length) {
+    schema.review = b.reviews.map((r) => ({
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: r.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      author: { '@type': 'Person', name: r.authorName ?? 'Usuario' },
+      datePublished: r.createdAt.toISOString().slice(0, 10),
+      name: r.title ?? undefined,
+      reviewBody: r.body,
+    }));
   }
 
   return schema;

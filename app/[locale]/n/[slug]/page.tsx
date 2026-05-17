@@ -10,10 +10,15 @@ import { JsonLd } from '@/components/seo/json-ld';
 import { Breadcrumbs } from '@/components/seo/breadcrumbs';
 import { BusinessHours } from '@/components/business/business-hours';
 import { ClaimButton } from '@/components/business/claim-button';
+import { ReviewList } from '@/components/business/review-list';
+import { ReviewForm } from '@/components/business/review-form';
 import { getServerSession } from '@/lib/session';
+import { userHasReviewFor } from '@/lib/queries';
 import { type Locale } from '@/i18n/config';
 import type { Metadata } from 'next';
 import { db } from '@/lib/db';
+
+export const revalidate = 600; // ISR: refresca cada 10 min; on-demand revalidate al moderar reviews
 
 type Params = { locale: Locale; slug: string };
 
@@ -112,7 +117,17 @@ export default async function BusinessPage({ params }: { params: Promise<Params>
       openTime: h.openTime,
       closeTime: h.closeTime,
     })),
+    reviews: biz.reviews.slice(0, 5).map((r) => ({
+      rating: r.rating,
+      title: r.title,
+      body: r.body,
+      authorName: r.user.name,
+      createdAt: r.createdAt,
+    })),
   });
+
+  const isOwner = !!session?.user && biz.ownerId === session.user.id;
+  const ownAlready = session?.user ? await userHasReviewFor(session.user.id, biz.id) : false;
 
   const mapsUrl =
     biz.lat && biz.lng
@@ -252,6 +267,38 @@ export default async function BusinessPage({ params }: { params: Promise<Params>
               />
             </div>
           </aside>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-6 pb-16">
+        <h2 className="text-xl font-semibold text-gray-900">Reseñas</h2>
+        <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
+          <ReviewList
+            reviews={biz.reviews.map((r) => ({
+              id: r.id,
+              rating: r.rating,
+              title: r.title,
+              body: r.body,
+              createdAt: r.createdAt,
+              authorName: r.user.name,
+              reply: r.reply,
+              replyAt: r.replyAt,
+            }))}
+            ratingAvg={biz.ratingAvg}
+            ratingCount={biz.ratingCount}
+            canReply={isOwner}
+            locale={locale}
+          />
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <ReviewForm
+              businessId={biz.id}
+              locale={locale}
+              isLoggedIn={!!session?.user}
+              loginUrl={`/${locale}/login?next=/${locale}/n/${tr.slug}`}
+              ownAlready={ownAlready}
+              isOwner={isOwner}
+            />
+          </div>
         </div>
       </section>
     </>
