@@ -79,7 +79,13 @@ export async function listBusinessesByCategory(opts: {
         media: { where: { isPrimary: true }, take: 1 },
         category: { include: { translations: { where: { locale: opts.locale } } } },
       },
-      orderBy: [{ featured: 'desc' }, { ratingAvg: 'desc' }, { publishedAt: 'desc' }],
+      // Premium > Featured > Free, luego featured editorial, luego rating, luego fecha
+      orderBy: [
+        { plan: 'desc' },
+        { featured: 'desc' },
+        { ratingAvg: 'desc' },
+        { publishedAt: 'desc' },
+      ],
       take: opts.limit ?? 24,
       skip: opts.offset ?? 0,
     }),

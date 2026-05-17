@@ -45,6 +45,12 @@ export default async function DashboardLayout({
               >
                 Mis negocios
               </Link>
+              <Link
+                href={`/${locale}/dashboard/billing`}
+                className="rounded-md px-3 py-2 text-gray-700 hover:bg-gray-100"
+              >
+                Suscripciones
+              </Link>
               {isAdmin && (
                 <div className="mt-4">
                   <div className="px-3 py-1 text-xs uppercase tracking-wide text-gray-400">Admin</div>

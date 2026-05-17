@@ -19,6 +19,7 @@ export async function SiteHeader() {
         <nav className="hidden items-center gap-6 text-sm text-gray-700 md:flex">
           <Link href="/buscar" className="hover:text-brand-700">{t('categories')}</Link>
           <Link href="/mapa" className="hover:text-brand-700">{t('map')}</Link>
+          <Link href="/precios" className="hover:text-brand-700">Precios</Link>
         </nav>
         <div className="flex items-center gap-3">
           <LocaleSwitcher />
